@@ -1,4 +1,4 @@
-package reggensc.poschtiapp;
+package reggensc.poschtiapp.domain;
 
 public class Unit {
 
