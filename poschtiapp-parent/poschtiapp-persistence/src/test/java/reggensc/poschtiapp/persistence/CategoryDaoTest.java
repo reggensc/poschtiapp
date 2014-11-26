@@ -1,8 +1,8 @@
 package reggensc.poschtiapp.persistence;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
+
+import org.junit.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,40 +13,40 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import reggensc.poschtiapp.domain.Category;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { TestContext.class })
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = { TestContext.class })
 public class CategoryDaoTest {
 
-	@Autowired
+	// @Autowired
 	private CategoryDao categoryDao;
 
 	private Category category;
 
-	@Before
+	// @Before
 	public void setUp() {
 		category = new Category();
 		category.setName("TestCategory");
 		category.setDescription("Description of TestCategory");
 	}
 
-	@Test
+	// @Test
 	public void testCreateUpdateDelete() {
 		List<Category> categories = categoryDao.getAll();
-		assertEquals(0, categories.size());
+		Assert.assertEquals(0, categories.size());
 
 		categoryDao.saveOrUpdate(category);
-		assertEquals(1, categoryDao.getAll().size());
+		Assert.assertEquals(1, categoryDao.getAll().size());
 
 		Long id = category.getId();
-		assertNotNull(id);
+		Assert.assertNotNull(id);
 
 		category = categoryDao.getById(id);
 		category.setName("Changed TestCategory");
 		categoryDao.saveOrUpdate(category);
-		assertEquals(1, categoryDao.getAll().size());
+		Assert.assertEquals(1, categoryDao.getAll().size());
 
 		categoryDao.delete(category);
-		assertEquals(0, categoryDao.getAll().size());
+		Assert.assertEquals(0, categoryDao.getAll().size());
 	}
 
 }
