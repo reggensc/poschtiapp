@@ -1,5 +1,6 @@
 package reggensc.poschtiapp.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,7 +10,10 @@ public class Category extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 
+	@Column(nullable = false)
 	private String name;
+
+	@Column(nullable = true)
 	private String description;
 
 	public String getName() {
