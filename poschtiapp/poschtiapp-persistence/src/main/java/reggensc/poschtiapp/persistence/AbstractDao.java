@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.transaction.Transactional;
 
 import reggensc.poschtiapp.domain.AbstractEntity;
 
@@ -27,14 +28,15 @@ public abstract class AbstractDao<T extends AbstractEntity> {
 
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() {
-		CriteriaQuery<AbstractEntity> cq = em.getQueryBuilder()
-				.createQuery(AbstractEntity.class);
+		CriteriaQuery<AbstractEntity> cq = em.getCriteriaBuilder().createQuery(
+				AbstractEntity.class);
 		cq.select(cq.from(entityClass));
 		return (List<T>) em.createQuery(cq).getResultList();
 	}
 
-	public void saveOrUpdate(T entity) {
-		em.merge(entity);
+	public T saveOrUpdate(T entity) {
+		T result = em.merge(entity);
+		return result;
 	}
 
 	public void delete(T entity) {
