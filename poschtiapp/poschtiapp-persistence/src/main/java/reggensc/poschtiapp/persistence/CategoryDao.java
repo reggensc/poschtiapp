@@ -7,8 +7,8 @@ import reggensc.poschtiapp.domain.Category;
 @Repository
 public class CategoryDao extends AbstractDao<Category> {
 
-	public CategoryDao() {
-		super(Category.class);
-	}
+    public CategoryDao() {
+        super(Category.class);
+    }
 
 }

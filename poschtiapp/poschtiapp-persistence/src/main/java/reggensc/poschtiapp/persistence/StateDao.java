@@ -7,8 +7,8 @@ import reggensc.poschtiapp.domain.State;
 @Repository
 public class StateDao extends AbstractDao<State> {
 
-	public StateDao() {
-		super(State.class);
-	}
+    public StateDao() {
+        super(State.class);
+    }
 
 }
