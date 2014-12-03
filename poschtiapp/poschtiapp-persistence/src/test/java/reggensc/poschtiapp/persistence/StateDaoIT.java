@@ -57,6 +57,7 @@ public class StateDaoIT {
 
         LOGGER.debug("Updating test data state");
         state = stateDao.saveOrUpdate(state);
+        stateDao.saveOrUpdate(state);
         Assert.assertEquals(origSize + 1, stateDao.getAll().size());
         LOGGER.debug("Successfully updated test data state");
 

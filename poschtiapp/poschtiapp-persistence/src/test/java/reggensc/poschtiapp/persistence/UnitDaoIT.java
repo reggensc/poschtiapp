@@ -57,6 +57,7 @@ public class UnitDaoIT {
 
         LOGGER.debug("Updating test data unit");
         unit = unitDao.saveOrUpdate(unit);
+        unitDao.saveOrUpdate(unit);
         Assert.assertEquals(origSize + 1, unitDao.getAll().size());
         LOGGER.debug("Successfully updated test data unit");
 
