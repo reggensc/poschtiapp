@@ -61,6 +61,8 @@ public class ShoppingItemDaoIT {
         LOGGER.debug("Successfully loaded initial shoppingItems");
 
         LOGGER.debug("Saving test data shoppingItem");
+        category = categoryDao.saveOrUpdate(category);
+        shoppingItem.setCategory(category);
         shoppingItem = shoppingItemDao.saveOrUpdate(shoppingItem);
         Assert.assertEquals(origSize + 1, shoppingItemDao.getAll().size());
         Long id = shoppingItem.getId();
@@ -80,6 +82,7 @@ public class ShoppingItemDaoIT {
 
         LOGGER.debug("Deleting test data shoppingItem");
         shoppingItemDao.delete(shoppingItem);
+        categoryDao.delete(category);
         Assert.assertEquals(origSize, shoppingItemDao.getAll().size());
         LOGGER.debug("Successfully deleted test data shoppingItem");
     }

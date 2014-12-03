@@ -32,7 +32,7 @@ public class User extends AbstractEntity {
     private Set<User> friends;
 
     public User() {
-        friends = new HashSet<User>();
+        friends = new HashSet<>();
     }
 
     public String getUserId() {

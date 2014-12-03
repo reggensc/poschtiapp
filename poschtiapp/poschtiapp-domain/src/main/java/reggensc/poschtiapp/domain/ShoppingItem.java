@@ -20,7 +20,7 @@ public class ShoppingItem extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Unit unit;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Category category;
 
     public String getName() {
