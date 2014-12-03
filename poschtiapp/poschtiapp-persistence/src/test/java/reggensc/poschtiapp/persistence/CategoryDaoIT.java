@@ -59,6 +59,7 @@ public class CategoryDaoIT {
 
         LOGGER.debug("Updating test data category");
         category = categoryDao.saveOrUpdate(category);
+        categoryDao.saveOrUpdate(category);
         Assert.assertEquals(origSize + 1, categoryDao.getAll().size());
         LOGGER.debug("Successfully updated test data category");
 
