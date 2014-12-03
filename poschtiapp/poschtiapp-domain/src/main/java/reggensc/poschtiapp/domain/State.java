@@ -2,30 +2,31 @@ package reggensc.poschtiapp.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ref_states")
+@Table(name = "ref_state", indexes = { @Index(name = "uk_designator", columnList = "designator", unique = true) })
 public class State extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
     @Column(nullable = false)
-    private String stateName;
+    private String designator;
 
-    public String getStateName() {
-        return stateName;
+    public String getDesignator() {
+        return designator;
     }
 
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
+    public void setDesignator(String designator) {
+        this.designator = designator;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((stateName == null) ? 0 : stateName.hashCode());
+        result = prime * result + ((designator == null) ? 0 : designator.hashCode());
         return result;
     }
 
@@ -41,11 +42,11 @@ public class State extends AbstractEntity {
             return false;
         }
         State other = (State) obj;
-        if (stateName == null) {
-            if (other.stateName != null) {
+        if (designator == null) {
+            if (other.designator != null) {
                 return false;
             }
-        } else if (!stateName.equals(other.stateName)) {
+        } else if (!designator.equals(other.designator)) {
             return false;
         }
         return true;
@@ -55,7 +56,7 @@ public class State extends AbstractEntity {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("State [state=");
-        builder.append(stateName);
+        builder.append(designator);
         builder.append(", id=");
         builder.append(getId());
         builder.append("]");

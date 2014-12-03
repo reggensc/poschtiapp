@@ -2,10 +2,11 @@ package reggensc.poschtiapp.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_category")
+@Table(name = "tbl_category", indexes = { @Index(name = "uk_name", columnList = "name", unique = true) })
 public class Category extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
@@ -13,7 +14,7 @@ public class Category extends AbstractEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = true)
+    @Column
     private String description;
 
     public String getName() {

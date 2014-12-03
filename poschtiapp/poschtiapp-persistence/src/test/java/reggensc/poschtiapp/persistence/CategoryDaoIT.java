@@ -20,7 +20,7 @@ import reggensc.poschtiapp.domain.Category;
 @ContextConfiguration(classes = { TestContext.class })
 public class CategoryDaoIT {
 
-    final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(StateDaoIT.class);
 
     @Autowired
     private CategoryDao categoryDao;
@@ -29,43 +29,43 @@ public class CategoryDaoIT {
 
     @Before
     public void setUp() {
-        logger.debug("Creating test data");
+        LOGGER.debug("Creating test data");
         category = new Category();
         category.setName("TestCategory");
         category.setDescription("Description of TestCategory");
-        logger.debug("Test data created: {}", category);
+        LOGGER.debug("Test data created: {}", category);
     }
 
     @Test
     @Transactional
     public void testCreateUpdateDelete() {
-        logger.debug("Loading initial categories");
+        LOGGER.debug("Loading initial categories");
         List<Category> categories = categoryDao.getAll();
         int origSize = categories.size();
-        logger.debug("Successfully loaded initial categories");
+        LOGGER.debug("Successfully loaded initial categories");
 
-        logger.debug("Saving test data category");
+        LOGGER.debug("Saving test data category");
         category = categoryDao.saveOrUpdate(category);
         Assert.assertEquals(origSize + 1, categoryDao.getAll().size());
         Long id = category.getId();
         Assert.assertNotNull(id);
-        logger.debug("Successfully saved test data category  ");
+        LOGGER.debug("Successfully saved test data category  ");
 
-        logger.debug("Loading test data category for update");
+        LOGGER.debug("Loading test data category for update");
         category = categoryDao.getById(id);
         category.setName("Changed TestCategory");
         category.setDescription("Changed description of TestCategory");
-        logger.debug("Successfully loaded test data category for update");
+        LOGGER.debug("Successfully loaded test data category for update");
 
-        logger.debug("Updating test data category");
+        LOGGER.debug("Updating test data category");
         categoryDao.saveOrUpdate(category);
         Assert.assertEquals(origSize + 1, categoryDao.getAll().size());
-        logger.debug("Successfully updated test data category");
+        LOGGER.debug("Successfully updated test data category");
 
-        logger.debug("Deleting test data category");
+        LOGGER.debug("Deleting test data category");
         categoryDao.delete(category);
         Assert.assertEquals(origSize, categoryDao.getAll().size());
-        logger.debug("Sucesffully deleted test data category");
+        LOGGER.debug("Successfully deleted test data category");
     }
 
 }
