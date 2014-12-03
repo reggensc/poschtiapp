@@ -10,7 +10,6 @@
 	</parent>
 	<artifactId>poschtiapp-persistence</artifactId>
 
-
 	<dependencies>
 		<dependency>
 				<groupId>org.slf4j</groupId>
