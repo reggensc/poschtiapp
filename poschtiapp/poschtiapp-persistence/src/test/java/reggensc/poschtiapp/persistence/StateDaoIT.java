@@ -31,7 +31,7 @@ public class StateDaoIT {
     public void setUp() {
         logger.debug("Creating test data");
         state = new State();
-        state.setState("TestState");
+        state.setStateName("TestState");
         logger.debug("Test data created: {}", state);
     }
 
@@ -52,7 +52,7 @@ public class StateDaoIT {
 
         logger.debug("Loading test data state for update");
         state = stateDao.getById(id);
-        state.setState("Changed TestState");
+        state.setStateName("Changed TestState");
         logger.debug("Successfully loaded test data state for update");
 
         logger.debug("Updating test data state");

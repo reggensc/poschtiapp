@@ -11,21 +11,21 @@ public class State extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     @Column(nullable = false)
-    private String state;
+    private String stateName;
 
-    public String getState() {
-        return state;
+    public String getStateName() {
+        return stateName;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((state == null) ? 0 : state.hashCode());
+        result = prime * result + ((stateName == null) ? 0 : stateName.hashCode());
         return result;
     }
 
@@ -41,11 +41,11 @@ public class State extends AbstractEntity {
             return false;
         }
         State other = (State) obj;
-        if (state == null) {
-            if (other.state != null) {
+        if (stateName == null) {
+            if (other.stateName != null) {
                 return false;
             }
-        } else if (!state.equals(other.state)) {
+        } else if (!stateName.equals(other.stateName)) {
             return false;
         }
         return true;
@@ -55,7 +55,7 @@ public class State extends AbstractEntity {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("State [state=");
-        builder.append(state);
+        builder.append(stateName);
         builder.append(", id=");
         builder.append(getId());
         builder.append("]");
