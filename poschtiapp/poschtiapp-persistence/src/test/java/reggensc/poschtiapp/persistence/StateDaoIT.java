@@ -20,7 +20,7 @@ import reggensc.poschtiapp.domain.State;
 @ContextConfiguration(classes = { TestContext.class })
 public class StateDaoIT {
 
-    final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(StateDaoIT.class);
 
     @Autowired
     private StateDao stateDao;
@@ -29,41 +29,41 @@ public class StateDaoIT {
 
     @Before
     public void setUp() {
-        logger.debug("Creating test data");
+        LOGGER.debug("Creating test data");
         state = new State();
-        state.setStateName("TestState");
-        logger.debug("Test data created: {}", state);
+        state.setDesignator("TestState");
+        LOGGER.debug("Test data created: {}", state);
     }
 
     @Test
     @Transactional
     public void testCreateUpdateDelete() {
-        logger.debug("Loading initial states");
+        LOGGER.debug("Loading initial states");
         List<State> states = stateDao.getAll();
         int origSize = states.size();
-        logger.debug("Successfully loaded initial states");
+        LOGGER.debug("Successfully loaded initial states");
 
-        logger.debug("Saving test data state");
+        LOGGER.debug("Saving test data state");
         state = stateDao.saveOrUpdate(state);
         Assert.assertEquals(origSize + 1, stateDao.getAll().size());
         Long id = state.getId();
         Assert.assertNotNull(id);
-        logger.debug("Successfully saved test data state  ");
+        LOGGER.debug("Successfully saved test data state  ");
 
-        logger.debug("Loading test data state for update");
+        LOGGER.debug("Loading test data state for update");
         state = stateDao.getById(id);
-        state.setStateName("Changed TestState");
-        logger.debug("Successfully loaded test data state for update");
+        state.setDesignator("Changed TestState");
+        LOGGER.debug("Successfully loaded test data state for update");
 
-        logger.debug("Updating test data state");
-        stateDao.saveOrUpdate(state);
+        LOGGER.debug("Updating test data state");
+        state = stateDao.saveOrUpdate(state);
         Assert.assertEquals(origSize + 1, stateDao.getAll().size());
-        logger.debug("Successfully updated test data state");
+        LOGGER.debug("Successfully updated test data state");
 
-        logger.debug("Deleting test data state");
+        LOGGER.debug("Deleting test data state");
         stateDao.delete(state);
         Assert.assertEquals(origSize, stateDao.getAll().size());
-        logger.debug("Sucesffully deleted test data state");
+        LOGGER.debug("Successfully deleted test data state");
     }
 
 }

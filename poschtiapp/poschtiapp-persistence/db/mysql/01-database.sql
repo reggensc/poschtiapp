@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS poschtiapp;
+CREATE DATABASE poschtiapp CHARACTER SET utf8 COLLATE utf8_general_ci;
