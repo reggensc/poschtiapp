@@ -15,9 +15,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import reggensc.poschtiapp.domain.Unit;
+import reggensc.poschtiapp.persistence.config.SpringApplicationConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { TestContext.class })
+@ContextConfiguration(classes = { SpringApplicationConfig.class })
 public class UnitDaoIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UnitDaoIT.class);

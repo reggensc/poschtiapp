@@ -1,4 +1,4 @@
-package reggensc.poschtiapp.persistence;
+package reggensc.poschtiapp.persistence.config;
 
 import java.util.Properties;
 
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @ComponentScan(basePackages = { "reggensc.poschtiapp" })
 @EnableTransactionManagement
-public class TestContext {
+public class SpringApplicationConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
