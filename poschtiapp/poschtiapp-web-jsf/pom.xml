@@ -10,6 +10,49 @@
 	<artifactId>poschtiapp-web-jsf</artifactId>
 	<packaging>war</packaging>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>start-container</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-container</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<container>
+						<containerId>tomcat8x</containerId>
+						<zipUrlInstaller>
+							<url>http://archive.apache.org/dist/tomcat/tomcat-8/v8.0.15/bin/apache-tomcat-8.0.15-windows-x64.zip</url>
+							<downloadDir>${user.home}/Downloads</downloadDir>
+							<extractDir>C:/BuildTools</extractDir>
+						</zipUrlInstaller>
+						<output>${project.build.directory}/tomcat/tomcat8.log</output>
+						<log>${project.build.directory}/cargo/cargo.log</log>
+					</container>
+					<configuration>
+						<home>${project.build.directory}/tomcat/tomcat-8/container</home>
+						<properties>
+							<cargo.logging>high</cargo.logging>
+						</properties>
+					</configuration>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.primefaces</groupId>
@@ -31,6 +74,17 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
