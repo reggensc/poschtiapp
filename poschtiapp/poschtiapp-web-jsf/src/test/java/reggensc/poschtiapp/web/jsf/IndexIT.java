@@ -31,4 +31,5 @@ public class IndexIT {
     public void tearDown() {
         driver.quit();
     }
+
 }
