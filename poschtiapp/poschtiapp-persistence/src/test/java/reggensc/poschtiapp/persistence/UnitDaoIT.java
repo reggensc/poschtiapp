@@ -1,71 +1,71 @@
 package reggensc.poschtiapp.persistence;
 
-import java.util.List;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Random;
 
-import javax.transaction.Transactional;
-
-import org.junit.Assert;
+import org.dbunit.DatabaseUnitException;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
 import reggensc.poschtiapp.domain.Unit;
 import reggensc.poschtiapp.persistence.config.SpringApplicationConfig;
+import reggensc.poschtiapp.testutils.SpringTestDbUnitFlatXmlDataSetLoader;
+
+import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
+import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { SpringApplicationConfig.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
+        TransactionDbUnitTestExecutionListener.class })
+@DbUnitConfiguration(dataSetLoader = SpringTestDbUnitFlatXmlDataSetLoader.class)
 public class UnitDaoIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UnitDaoIT.class);
+    private static final String DBUNIT_DATASET_LOCATION = "classpath:/dbunit/reference_db.dbunit.xml";
 
     @Autowired
     private UnitDao unitDao;
 
-    private Unit unit;
+    private static Random random;
+    private Long testIdentifier;
+
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        random = new Random();
+    }
 
     @Before
     public void setUp() {
-        LOGGER.debug("Creating test data");
-        unit = new Unit();
-        unit.setDesignator("TestUnit");
-        LOGGER.debug("Test data created: {}", unit);
+        testIdentifier = random.nextLong();
+    }
+
+    // FIXME test validation constraints
+
+    @Test
+    @DatabaseSetup(DBUNIT_DATASET_LOCATION)
+    @DatabaseTearDown(DBUNIT_DATASET_LOCATION)
+    public void testCreate() throws DatabaseUnitException, SQLException, IOException {
+        Unit unit = new Unit();
+        unit.setDesignator(testIdentifier + " Test Unit");
+        unitDao.create(unit);
     }
 
     @Test
-    @Transactional
-    public void testCreateUpdateDelete() {
-        LOGGER.debug("Loading initial units");
-        List<Unit> units = unitDao.getAll();
-        int origSize = units.size();
-        LOGGER.debug("Successfully loaded initial units");
-
-        LOGGER.debug("Saving test data unit");
-        unit = unitDao.saveOrUpdate(unit);
-        Assert.assertEquals(origSize + 1, unitDao.getAll().size());
-        Long id = unit.getId();
-        Assert.assertNotNull(id);
-        LOGGER.debug("Successfully saved test data unit  ");
-
-        LOGGER.debug("Loading test data unit for update");
-        unit = unitDao.getById(id);
-        unit.setDesignator("Changed TestUnit");
-        LOGGER.debug("Successfully loaded test data unit for update");
-
-        LOGGER.debug("Updating test data unit");
-        unit = unitDao.saveOrUpdate(unit);
-        unitDao.saveOrUpdate(unit);
-        Assert.assertEquals(origSize + 1, unitDao.getAll().size());
-        LOGGER.debug("Successfully updated test data unit");
-
-        LOGGER.debug("Deleting test data unit");
-        unitDao.delete(unit);
-        Assert.assertEquals(origSize, unitDao.getAll().size());
-        LOGGER.debug("Successfully deleted test data unit");
+    @DatabaseSetup(DBUNIT_DATASET_LOCATION)
+    @DatabaseTearDown(DBUNIT_DATASET_LOCATION)
+    public void testDelete() {
+        unitDao.deleteById(1L);
     }
 
 }

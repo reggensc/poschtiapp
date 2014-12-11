@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataset SYSTEM "dataset.dtd">
+
+<dataset>
+	<revinfo />
+	<aud_map_owners />
+	<aud_ref_state />
+	<aud_ref_unit />
+	<aud_shoppinglist_shoppingcategory />
+	<aud_tbl_shoppingcategory />
+	<aud_tbl_shoppingitem />
+	<aud_tbl_shoppinglist />
+	<aud_tbl_user />
+
+	<ref_unit id="1" designator="qty" />
+	<ref_unit id="2" designator="liter" />
+
+	<ref_state id="1" designator="TestState" />
+	<ref_state id="2" designator="Created" />
+	<ref_state id="3" designator="Purchased" />
+
+	<tbl_user id="1" email="test.email@testdata.org" firstName="TestFirstName" lastName="TestLastName" />
+	<tbl_user id="2" email="hans.muster@testdata.org" firstName="Hans" lastName="Muster" />
+	<tbl_user id="3" email="rene.eggenschwiler@testdata.org" firstName="Hans" lastName="Muster" />
+
+	<tbl_shoppinglist id="1" name="Test ShoppingList 1" state_id="2" />
+	<tbl_shoppinglist id="2" name="Test ShoppingList 2" state_id="2" />
+	<tbl_shoppinglist id="3" name="Test ShoppingList 3" state_id="2" />
+
+	<map_owners list_id="1" user_id="2" />
+	<map_owners list_id="2" user_id="2" />
+	<map_owners list_id="3" user_id="2" />
+
+	<tbl_shoppingcategory id="1" name="Test Category 1" />
+	<tbl_shoppingcategory id="2" name="Test Category i0" list_id="3" list_index="0" />
+	<tbl_shoppingcategory id="3" name="Test Category i1" list_id="3" list_index="1" />
+	<tbl_shoppingcategory id="4" name="Test Category 4" />
+
+	<tbl_shoppingitem id="1" name="Test Item" description="Test Description" quantity="3" unit_id="2"
+		category_id="4" category_index="0" />
+
+</dataset>

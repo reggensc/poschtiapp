@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 
-import reggensc.poschtiapp.domain.ShoppingItem;
+import reggensc.poschtiapp.domain.ShoppingCategory;
 import reggensc.poschtiapp.persistence.config.SpringApplicationConfig;
 import reggensc.poschtiapp.testutils.SpringTestDbUnitFlatXmlDataSetLoader;
 
@@ -30,12 +30,12 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DirtiesContextTestExecutionListener.class,
         TransactionDbUnitTestExecutionListener.class })
 @DbUnitConfiguration(dataSetLoader = SpringTestDbUnitFlatXmlDataSetLoader.class)
-public class ShoppingItemDaoIT {
+public class ShoppingCategoryDaoIT {
 
     private static final String DBUNIT_DATASET_LOCATION = "classpath:/dbunit/reference_db.dbunit.xml";
 
     @Autowired
-    private ShoppingItemDao shoppingItemDao;
+    private ShoppingCategoryDao shoppingCategoryDao;
 
     private static Random random;
     private Long testIdentifier;
@@ -55,22 +55,19 @@ public class ShoppingItemDaoIT {
     @Test
     @DatabaseSetup(DBUNIT_DATASET_LOCATION)
     @DatabaseTearDown(DBUNIT_DATASET_LOCATION)
-    public void testCreate() throws DatabaseUnitException, SQLException, IOException {
-        ShoppingItem shoppingItem = new ShoppingItem();
-        shoppingItem.setName(testIdentifier + " Test ShoppingItem");
-        shoppingItem.setDescription("description");
-        shoppingItem.setQuantity(3);
-        shoppingItem.setUnit(null);
-
-        // TODO save with all values
-        shoppingItemDao.create(shoppingItem);
+    public void testCreateWithoutItems() throws DatabaseUnitException, SQLException, IOException {
+        ShoppingCategory shoppingCategory = new ShoppingCategory();
+        shoppingCategory.setName(testIdentifier + " Test ShoppingCategory");
+        shoppingCategoryDao.create(shoppingCategory);
     }
+
+    // TODO testCreateWithItems shoppingCategory
 
     @Test
     @DatabaseSetup(DBUNIT_DATASET_LOCATION)
     @DatabaseTearDown(DBUNIT_DATASET_LOCATION)
     public void testDelete() {
-        shoppingItemDao.deleteById(1L);
+        shoppingCategoryDao.deleteById(1L);
     }
 
 }

@@ -4,24 +4,31 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "tbl_shoppingitem")
+@Audited
 public class ShoppingItem extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
     @Column(nullable = false)
+    @NotNull
     private String name;
+
+    @Column
     private String description;
+
+    @Column
     private Integer quantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Unit unit;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    private Category category;
 
     public String getName() {
         return name;
@@ -55,19 +62,10 @@ public class ShoppingItem extends AbstractEntity {
         this.unit = unit;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((category == null) ? 0 : category.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
@@ -87,13 +85,6 @@ public class ShoppingItem extends AbstractEntity {
             return false;
         }
         ShoppingItem other = (ShoppingItem) obj;
-        if (category == null) {
-            if (other.category != null) {
-                return false;
-            }
-        } else if (!category.equals(other.category)) {
-            return false;
-        }
         if (description == null) {
             if (other.description != null) {
                 return false;
@@ -136,8 +127,6 @@ public class ShoppingItem extends AbstractEntity {
         builder.append(quantity);
         builder.append(", unit=");
         builder.append(unit);
-        builder.append(", category=");
-        builder.append(category);
         builder.append(", id=");
         builder.append(getId());
         builder.append("]");

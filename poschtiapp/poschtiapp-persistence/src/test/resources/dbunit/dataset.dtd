@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT dataset (
+        revinfo+,
+        aud_map_owners+,
+        aud_ref_state+,
+        aud_ref_unit+,
+        aud_shoppinglist_shoppingcategory+,
+        aud_tbl_shoppingcategory+,
+        aud_tbl_shoppingitem+,
+        aud_tbl_shoppinglist+,
+        aud_tbl_user+,
+        ref_unit+,
+        ref_state+,
+        tbl_user+,
+        tbl_shoppinglist+,
+        map_owners+,
+        tbl_shoppingcategory+,
+        tbl_shoppingitem+
+    )
+>
+
+<!ELEMENT revinfo EMPTY>
+<!ELEMENT aud_map_owners EMPTY>
+<!ELEMENT aud_ref_state EMPTY>
+<!ELEMENT aud_ref_unit EMPTY>
+<!ELEMENT aud_shoppinglist_shoppingcategory EMPTY>
+<!ELEMENT aud_tbl_shoppingcategory EMPTY>
+<!ELEMENT aud_tbl_shoppingitem EMPTY>
+<!ELEMENT aud_tbl_shoppinglist EMPTY>
+<!ELEMENT aud_tbl_user EMPTY>
+
+<!ELEMENT ref_unit EMPTY>
+<!ATTLIST ref_unit 
+    id CDATA #REQUIRED
+    designator CDATA #REQUIRED
+>
+
+<!ELEMENT ref_state EMPTY>
+<!ATTLIST ref_state 
+    id CDATA #REQUIRED
+    designator CDATA #REQUIRED
+>
+
+<!ELEMENT tbl_user EMPTY>
+<!ATTLIST tbl_user
+    id CDATA #REQUIRED
+    email  CDATA #REQUIRED
+    firstName CDATA #IMPLIED
+    lastName  CDATA #IMPLIED  
+>
+
+<!ELEMENT tbl_shoppinglist EMPTY>
+<!ATTLIST tbl_shoppinglist
+    id CDATA #REQUIRED
+    name CDATA #REQUIRED
+    state_id CDATA #REQUIRED
+>
+
+<!ELEMENT map_owners EMPTY>
+<!ATTLIST map_owners
+    list_id CDATA #REQUIRED
+    user_id CDATA #REQUIRED
+>
+
+<!ELEMENT tbl_shoppingcategory EMPTY>
+<!ATTLIST tbl_shoppingcategory
+    id CDATA #REQUIRED
+    name CDATA #REQUIRED 
+    list_id  CDATA #IMPLIED
+    list_index  CDATA #IMPLIED 
+>
+
+<!ELEMENT tbl_shoppingitem EMPTY>
+<!ATTLIST tbl_shoppingitem
+    id CDATA #REQUIRED
+    name CDATA #REQUIRED
+    description CDATA #IMPLIED
+    quantity CDATA #IMPLIED 
+    unit_id CDATA #IMPLIED
+    category_id CDATA #IMPLIED 
+    category_index CDATA #IMPLIED
+>

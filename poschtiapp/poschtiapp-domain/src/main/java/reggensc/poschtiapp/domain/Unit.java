@@ -4,14 +4,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "ref_unit", indexes = { @Index(name = "uk_designator", columnList = "designator", unique = true) })
+@Audited
 public class Unit extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
     @Column(nullable = false)
+    @NotNull
     private String designator;
 
     public String getDesignator() {
