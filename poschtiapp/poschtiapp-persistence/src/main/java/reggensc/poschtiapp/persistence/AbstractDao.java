@@ -13,7 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import reggensc.poschtiapp.domain.AbstractEntity;
 
-@Transactional // FIXME Move @Transactional to service facade 
+//TODO Move @Transactional to service facade
+@Transactional
 public abstract class AbstractDao<T extends AbstractEntity> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDao.class);

@@ -64,7 +64,7 @@ public class ShoppingListDaoIT {
         testIdentifier = random.nextLong();
     }
 
-    // FIXME test validation constraints
+    // TODO test validation constraints
 
     @Test(expected = ConstraintViolationException.class)
     @DatabaseSetup(DBUNIT_DATASET_LOCATION)
@@ -108,7 +108,7 @@ public class ShoppingListDaoIT {
         shoppingList.setState(state);
         shoppingList.addOwner(user);
 
-        // FIXME test with categories
+        // TODO test with categories
 
         shoppingListDao.create(shoppingList);
     }

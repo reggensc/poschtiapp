@@ -50,7 +50,7 @@ public class StateDaoIT {
         testIdentifier = random.nextLong();
     }
 
-    // FIXME test validation constraints
+    // TODO test validation constraints
 
     @Test
     @DatabaseSetup(DBUNIT_DATASET_LOCATION)
