@@ -1,11 +1,10 @@
-package reggensc.poschtiapp.persistence.config;
+package reggensc.poschtiapp.web.jsf.config;
 
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-import org.dbunit.ext.mysql.MySqlDataTypeFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +17,10 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.github.springtestdbunit.bean.DatabaseConfigBean;
-import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
-
 @Configuration
 @ComponentScan(basePackages = { "reggensc.poschtiapp" })
 @EnableTransactionManagement
-public class SpringApplicationConfig {
+public class PersistenceConfig {
 
     @Bean
     public DataSource dataSource() {
@@ -34,20 +30,6 @@ public class SpringApplicationConfig {
         dataSource.setUsername("poschtiapp");
         dataSource.setPassword("poschtiapp");
         return dataSource;
-    }
-
-    @Bean
-    public DatabaseConfigBean dbUnitDatabaseConfig() {
-        final DatabaseConfigBean bean = new DatabaseConfigBean();
-        bean.setDatatypeFactory(new MySqlDataTypeFactory());
-        return bean;
-    }
-
-    @Bean
-    public DatabaseDataSourceConnectionFactoryBean dbUnitDatabaseConnection() {
-        final DatabaseDataSourceConnectionFactoryBean bean = new DatabaseDataSourceConnectionFactoryBean(dataSource());
-        bean.setDatabaseConfig(dbUnitDatabaseConfig());
-        return bean;
     }
 
     @Bean

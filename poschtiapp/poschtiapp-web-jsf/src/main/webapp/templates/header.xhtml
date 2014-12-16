@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head></h:head>
+<h:body>
+	<ui:composition>
+		<h:form action="#{request.contextPath}/j_spring_security_logout">
+			<div class="ui-grid ui-grid-responsive">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-1">This is the header</div>
+					<div class="ui-grid-col-1">
+						<!-- <p:commandButton type="submit" value="Logout #{request.remoteUser}" update="@form" ajax="false" /> -->
+						<h:outputLink value="#{request.contextPath}/logout">Logout</h:outputLink>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:composition>
+</h:body>
+</html>

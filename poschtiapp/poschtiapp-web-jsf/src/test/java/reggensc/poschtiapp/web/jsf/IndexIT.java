@@ -12,19 +12,29 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class IndexIT {
 
     private WebDriver driver;
+    private final String TEST_PAGE_ADDRESS = "http://localhost:8080/poschtiapp-web-jsf/";
 
     @Before
     public void setUp() {
         // driver = new ChromeDriver();
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080/poschtiapp-web-jsf/");
+        driver.get(TEST_PAGE_ADDRESS);
     }
 
     @Test
-    public void testGetPage() {
-        WebElement element = driver.findElement(By.id("j_idt4"));
-        String watermarkText = element.getAttribute("placeholder");
-        Assert.assertEquals("Watermark here", watermarkText);
+    public void testLoginWithoutRememberMe() {
+        WebElement usernameInput = driver.findElement(By.id("username"));
+        Assert.assertNotNull(usernameInput);
+        WebElement passwordInput = driver.findElement(By.id("password"));
+        Assert.assertNotNull(passwordInput);
+        WebElement loginbutton = driver.findElement(By.id("loginButton"));
+        Assert.assertNotNull(loginbutton);
+
+        usernameInput.sendKeys("test.email@testdata.org");
+        passwordInput.sendKeys("1234");
+        loginbutton.click();
+
+        Assert.assertEquals(TEST_PAGE_ADDRESS, driver.getCurrentUrl());
     }
 
     @After

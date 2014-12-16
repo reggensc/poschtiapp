@@ -20,15 +20,14 @@ public class ShoppingListDao extends AbstractDao<ShoppingList> {
     }
 
     public List<ShoppingList> getByOwnerEmail(String email) {
-        LOGGER.trace("Trying to load all entities of type {}", entityClass.getCanonicalName());
+        LOGGER.trace("Trying to load all shopping lists by owner email: {}", email);
 
         Query query = em.createNamedQuery("findByOwnerEmail");
         query.setParameter("email", email);
         @SuppressWarnings("unchecked")
         List<ShoppingList> resultList = query.getResultList();
 
-        LOGGER.trace("Successfully loaded {} entities of type {}", resultList.size(), entityClass.getCanonicalName());
+        LOGGER.trace("Successfully loaded {} shopping lists by owner email: {}", resultList.size(), email);
         return resultList;
     }
-
 }

@@ -1,40 +1,22 @@
-package reggensc.poschtiapp.domain;
+package reggensc.poschtiapp.web.springsecurity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.NamedNativeQuery;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import java.util.Collection;
 
-import org.hibernate.envers.Audited;
+import org.springframework.security.core.GrantedAuthority;
 
-@Entity
-@Table(name = "tbl_user", indexes = { @Index(columnList = "email", unique = true, name = "uk_email") })
-@Audited
-@NamedQuery(name = "findByEmail", query = "SELECT u from User u WHERE u.email = :email")
-@NamedNativeQuery(name = "findPassword", query = "SELECT `password` FROM `tbl_user` WHERE `email` = ?")
-public class User extends AbstractEntity {
+import reggensc.poschtiapp.domain.User;
+
+public class UserDetails extends org.springframework.security.core.userdetails.User {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(nullable = false)
-    @NotNull
-    private String email;
-
-    @Column(nullable = false)
     private String firstName;
-
-    @Column(nullable = false)
     private String lastName;
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public UserDetails(User user, String password, Collection<? extends GrantedAuthority> authorities) {
+        super(user.getEmail(), password, authorities);
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
     }
 
     public String getFirstName() {
@@ -57,7 +39,6 @@ public class User extends AbstractEntity {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
         result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
         return result;
@@ -71,17 +52,10 @@ public class User extends AbstractEntity {
         if (!super.equals(obj)) {
             return false;
         }
-        if (!(obj instanceof User)) {
+        if (!(obj instanceof UserDetails)) {
             return false;
         }
-        User other = (User) obj;
-        if (email == null) {
-            if (other.email != null) {
-                return false;
-            }
-        } else if (!email.equals(other.email)) {
-            return false;
-        }
+        UserDetails other = (UserDetails) obj;
         if (firstName == null) {
             if (other.firstName != null) {
                 return false;
@@ -102,14 +76,12 @@ public class User extends AbstractEntity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("User [email=");
-        builder.append(email);
-        builder.append(", firstName=");
+        builder.append("UserDetails [firstName=");
         builder.append(firstName);
         builder.append(", lastName=");
         builder.append(lastName);
-        builder.append(", getId()=");
-        builder.append(getId());
+        builder.append(", toString()=");
+        builder.append(super.toString());
         builder.append("]");
         return builder.toString();
     }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+</h:head>
+<h:body>
+
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="75">
+			<ui:insert name="header">
+				<ui:include src="/templates/header.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<p:messages />
+			<ui:insert name="content" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" size="50">
+			<ui:insert name="footer">
+				<ui:include src="/templates/footer.xhtml" />
+			</ui:insert>
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

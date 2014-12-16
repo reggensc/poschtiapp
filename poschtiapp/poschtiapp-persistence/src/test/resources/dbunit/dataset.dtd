@@ -48,6 +48,7 @@
     email  CDATA #REQUIRED
     firstName CDATA #IMPLIED
     lastName  CDATA #IMPLIED  
+    password CDATA #REQUIRED
 >
 
 <!ELEMENT tbl_shoppinglist EMPTY>

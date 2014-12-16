@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+</h:head>
+<h:body>
+	<p:messages />
+	<h:form id="loginForm" action="j_security_check" method="post" prependId="false">
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-1">
+					<p:outputLabel for="username" value="Email" />
+				</div>
+				<div class="ui-grid-col-1">
+					<p:inputText id="username" />
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-1">
+					<p:outputLabel for="password" value="Password" />
+				</div>
+				<div class="ui-grid-col-1">
+					<p:password id="password" />
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-1">
+					<p:outputLabel for="remember_me" value="Remember Me" />
+				</div>
+				<div class="ui-grid-col-1">
+					<p:selectBooleanButton id="remember_me" onLabel="Yes" offLabel="No" />
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-1"></div>
+				<div class="ui-grid-col-1">
+					<p:commandButton id="loginButton" type="submit" value="Login" ajax="false" />
+				</div>
+			</div>
+		</div>
+	</h:form>
+</h:body>
+</html>

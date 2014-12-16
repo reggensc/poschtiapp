@@ -19,9 +19,9 @@
 	<ref_state id="2" designator="Created" />
 	<ref_state id="3" designator="Purchased" />
 
-	<tbl_user id="1" email="test.email@testdata.org" firstName="TestFirstName" lastName="TestLastName" />
-	<tbl_user id="2" email="hans.muster@testdata.org" firstName="Hans" lastName="Muster" />
-	<tbl_user id="3" email="rene.eggenschwiler@testdata.org" firstName="Hans" lastName="Muster" />
+	<tbl_user id="1" email="test.email@testdata.org" firstName="TestFirstName" lastName="TestLastName" password="1234" />
+	<tbl_user id="2" email="hans.muster@testdata.org" firstName="Hans" lastName="Muster" password="1234" />
+	<tbl_user id="3" email="rene.eggenschwiler@testdata.org" firstName="Hans" lastName="Muster" password="1234" />
 
 	<tbl_shoppinglist id="1" name="Test ShoppingList 1" state_id="2" />
 	<tbl_shoppinglist id="2" name="Test ShoppingList 2" state_id="2" />
