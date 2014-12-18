@@ -9,9 +9,11 @@
 			<div class="ui-grid ui-grid-responsive">
 				<div class="ui-grid-row">
 					<div class="ui-grid-col-1">This is the header</div>
-					<div class="ui-grid-col-1">
-						<!-- <p:commandButton type="submit" value="Logout #{request.remoteUser}" update="@form" ajax="false" /> -->
-						<h:outputLink value="#{request.contextPath}/logout">Logout</h:outputLink>
+					<div class="ui-grid-col-11" align="right">
+						<h:outputLink value="#{request.contextPath}/logout">
+						  #{request.userPrincipal.principal.firstName} 
+						  #{request.userPrincipal.principal.lastName}
+						</h:outputLink>
 					</div>
 				</div>
 			</div>
